@@ -1,10 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
+import useLocalStorage from "../../hooks/UseLocalStorage/useLocalStorage";
 
 function CounterFn({max}) {
-    const [count, setCount] = useState(getStateFromLocalStorage().count)
+    const [count, setCount] = useLocalStorage(0, 'count')
+    const counterRef = useRef();
+    counterRef.current = count;
+
+    // useEffect(() => {
+    //     localStorage.setItem('counterState', JSON.stringify({count}))
+    // }, [count])
 
     useEffect(() => {
-        localStorage.setItem('counterState', JSON.stringify({count}))
+        const d = new Date().getSeconds()
+        const interval = setInterval(() => {
+            console.log(`Counter: ${counterRef.current}`, new Date().getSeconds() - d)
+        }, 3000)
+
+        return () => {
+            clearInterval(interval)
+        }
     }, [count])
 
     function increment() {

@@ -26,6 +26,13 @@ class Counter extends Component {
         this.reset = this.reset.bind(this)
     }
 
+    componentDidUpdate() {
+        setTimeout(() => {
+            console.log(`Count: ${this.state.count}`)
+        }, 3000)
+    }
+
+
     increment() {
         this.setState(
             increment,

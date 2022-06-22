@@ -11,7 +11,7 @@ function CounterFn({max}) {
     // }, [count])
 
     useEffect(() => {
-        const d = new Date().getSeconds()
+        // const d = new Date().getSeconds()
         const interval = setInterval(() => {
             console.log(`Counter: ${counterRef.current}`, new Date().getSeconds() - d)
         }, 3000)

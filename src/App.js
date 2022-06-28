@@ -1,23 +1,20 @@
 import './App.css';
-import {useReducer} from "react";
+import {useCallback, useReducer} from "react";
 import { v4 as id } from 'uuid';
 
 import initialState from "./initialState";
 import Grudges from "./components/Grudges/Grudges";
 import NewGrudge from "./components/Grudges/NewGrudge";
-import {reducer} from "./components/reducer";
+import {reducer} from "./reducer";
 // import Counter from "./components/Counter/Counter";
 // import CounterFn from "./components/CounterFn/CounterFn";
-import {GRUDGE_ADD} from "./actionTypes"
+import {GRUDGE_ADD, GRUDGE_FORGIVE} from "./actionTypes"
 
 function App() {
     const [grudges, dispatch] = useReducer(reducer, initialState);
 
 
-    const addGrudge = ({person, reason}) => {
-        // grudge.id = id()
-        // grudge.forgiven = false;
-
+    const addGrudge = useCallback(({person, reason}) => {
         dispatch({
             type: GRUDGE_ADD,
             payload: {
@@ -27,19 +24,17 @@ function App() {
             // meta
             // error
         })
+    }, [dispatch])
 
+    const toggleForgiveness = useCallback((id) => {
+        dispatch({
+            type: GRUDGE_FORGIVE,
+            payload: {
+                id
+            }
+        })
 
-        setGrudges([grudge, ...grudges])
-    }
-
-    const toggleForgiveness = (id) => {
-        setGrudges(
-            grudges.map((grudge) => {
-                if (grudge.id !== id) return grudge
-                return {...grudge, forgiven: !grudge.forgiven}
-            })
-        )
-    }
+    }, [dispatch])
 
     return (
         <div className="App">

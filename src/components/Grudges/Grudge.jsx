@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Grudge({grudge: {id, person, reason, forgiven}, onForgive}) {
+const Grudge = React.memo(({grudge: {id, person, reason, forgiven}, onForgive}) => {
     const forgive = () => onForgive(id)
 
-    // console.log('grudge', id)
+    console.log('grudge', id)
 
     return (
         <div>
@@ -13,6 +13,6 @@ function Grudge({grudge: {id, person, reason, forgiven}, onForgive}) {
             <input type="checkbox" id="forgiven" checked={forgiven} onChange={forgive}/>
         </div>
     );
-}
+})
 
 export default Grudge;

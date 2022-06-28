@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 
-function NewGrudge({onSubmit}) {
+const NewGrudge = React.memo(({onSubmit}) => {
     const [person, setPerson] = useState('')
     const [reason, setReason] = useState('')
 
-    // console.log('new grudge')
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -35,6 +34,6 @@ function NewGrudge({onSubmit}) {
             <input type="submit" value="Add"/>
         </form>
     );
-}
+})
 
 export default NewGrudge;

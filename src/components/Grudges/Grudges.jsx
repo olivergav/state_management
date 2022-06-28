@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Grudge from "./Grudge";
+import {GrudgeContext} from "../../GrudgeContext";
 
-function Grudges({grudges = [], onForgive}) {
+function Grudges() {
+    const {grudges} = useContext(GrudgeContext)
+
     return (
         <div>
             <h2>Grudges: ({grudges.length})</h2>
             {grudges.map((grudge) => (
-                <Grudge key={grudge.id} grudge={grudge} onForgive={onForgive}/>
+                <Grudge key={grudge.id} grudge={grudge}/>
             ))}
         </div>
     );
